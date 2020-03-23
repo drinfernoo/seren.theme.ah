@@ -29,39 +29,7 @@
             </control>
             
             <include condition="!Skin.HasSetting(global.showvideo)">Global_Videowindow_Hidden</include>
-            <control type="group">
-                <control type="image">
-                    <texture colordiffuse="Background">common/bg.jpg</texture>
-                </control>
-                <control type="multiimage">
-                    <include>Animation_FadeInOut</include>
-                    <include>Defs_TimePerImage</include>
-                    <randomize>true</randomize>
-                    <width>1920</width>
-                    <height>1080</height>
-                    <aspectratio>scale</aspectratio>
-                    <include condition="![!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]">Defs_Global_Fade_Blur</include>
-                    <fadetime>600</fadetime>
-                    <imagepath background="true">$INFO[Window().Property(item.art.fanart)]</imagepath>
-                    <animation effect="fade" end="50" condition="![!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]">Conditional</animation>
-                    <animation effect="fade" end="40" condition="[!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]">Conditional</animation>
-                    <visible>$EXP[Exp_GlobalBackground]</visible>
-                    <animation effect="fade" start="100" end="0" time="2000" tween="cubic" easing="inout" condition="Window.IsVisible(DialogBusy.xml) + [!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]">Conditional</animation>
-                </control>
-                <control type="group">
-                    <visible>!$EXP[Exp_GlobalBackground]</visible>
-                    <include condition="Skin.HasSetting(global.showvideo)">Global_Videowindow</include>
-                    <include condition="Skin.HasSetting(global.showvisualisation)">Global_Visualisation</include>
-                </control>
-                <control type="image">
-                    <texture colordiffuse="$VAR[ColorHighlight4]" background="true">common/vignette-white.png</texture>
-                    <visible>[!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]</visible>
-                </control>
-                <control type="image">
-                    <texture background="true">common/vignette-full.png</texture>
-                    <visible>[!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]</visible>
-                </control>
-            </control>
+            <include>Global_Background_Main</include>
             
             <!-- Viewtypes -->
             <control type="group">
