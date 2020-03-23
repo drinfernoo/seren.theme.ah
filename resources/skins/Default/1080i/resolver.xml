@@ -201,13 +201,13 @@
                         <animation effect="fade" end="0" start="100" condition="Integer.IsEqual(Container().NumItems,0)">Conditional</animation>
                         
                         <include content="Viewtype_BackPanel">
-                            <include>Animation_Down</include>
+                            <!-- <include>Animation_Down</include> -->
                             <visible>!Integer.IsEqual(Container().NumItems,0)</visible>
                             <height>480</height>
                         </include>
                         
                         <control type="group">
-                            <include>Animation_Down</include>
+                            <!-- <include>Animation_Down</include> -->
                             
                             <control type="group">
                                 <right>-20</right>
@@ -329,12 +329,12 @@
                         </control>
                         
                         <control type="group">
-                            <include>Animation_Down</include>
+                            <!-- <include>Animation_Down</include> -->
                             <right>-20</right>
                             <bottom>-480</bottom>
                             
                             <include content="Defs_BusySpinner">
-                                <param name="label" value="$INFO[Window().Property(notification_text)]" />
+                                <param name="label" value="Starting Playback..." />
                                 <param name="textcolor" value="main_fg_70" />
                             </include>
                         </control>
