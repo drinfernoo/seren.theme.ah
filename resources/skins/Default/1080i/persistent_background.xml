@@ -1,52 +1,319 @@
 <window type="dialog">
-    <defaultcontrol>2</defaultcontrol>
+    <defaultcontrol>1000</defaultcontrol>
     <coordinates>
         <left>0</left>
         <top>0</top>
     </coordinates>
+    
     <controls>
-        <!-- Background Texture -->
-        <control type="image">
-            <texture>$INFO[Window().Property(texture.white)]</texture>
-            <colordiffuse>FF000000</colordiffuse>
-        </control>
+        
+        <!-- Viewtype_Main -->
+        <control type="group">
+            <control type="image">
+                <width>24</width>
+                <left>-24</left>
+                <texture>common/shadow-line-vert-24.png</texture>
+                <visible>Skin.HasSetting(ShadowLines)</visible>
+            </control>
+            
+            <control type="multiimage" id="7975">
+                <left>-2160</left>
+                <width>1</width>
+                <height>1</height>
+                <include>Defs_TimePerImage</include>
+                <randomize>true</randomize>
+                <fadetime>600</fadetime>
+                <imagepath background="true">$INFO[Window().Property(item.art.poster)]</imagepath>
+                <visible>System.HasAddon(script.colorbox)</visible>
+                <visible>![!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]</visible>
+            </control>
+            
+            <include condition="!Skin.HasSetting(global.showvideo)">Global_Videowindow_Hidden</include>
+            <control type="group">
+                <control type="image">
+                    <texture colordiffuse="Background">common/bg.jpg</texture>
+                </control>
+                <control type="multiimage">
+                    <include>Animation_FadeInOut</include>
+                    <include>Defs_TimePerImage</include>
+                    <randomize>true</randomize>
+                    <width>1920</width>
+                    <height>1080</height>
+                    <aspectratio>scale</aspectratio>
+                    <include condition="![!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]">Defs_Global_Fade_Blur</include>
+                    <fadetime>600</fadetime>
+                    <imagepath background="true">$INFO[Window().Property(item.art.fanart)]</imagepath>
+                    <animation effect="fade" end="50" condition="![!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]">Conditional</animation>
+                    <animation effect="fade" end="40" condition="[!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]">Conditional</animation>
+                    <visible>$EXP[Exp_GlobalBackground]</visible>
+                    <animation effect="fade" start="100" end="0" time="2000" tween="cubic" easing="inout" condition="Window.IsVisible(DialogBusy.xml) + [!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]">Conditional</animation>
+                </control>
+                <control type="group">
+                    <visible>!$EXP[Exp_GlobalBackground]</visible>
+                    <include condition="Skin.HasSetting(global.showvideo)">Global_Videowindow</include>
+                    <include condition="Skin.HasSetting(global.showvisualisation)">Global_Visualisation</include>
+                </control>
+                <control type="image">
+                    <texture colordiffuse="$VAR[ColorHighlight4]" background="true">common/vignette-white.png</texture>
+                    <visible>[!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]</visible>
+                </control>
+                <control type="image">
+                    <texture background="true">common/vignette-full.png</texture>
+                    <visible>[!System.HasAddon(script.colorbox) | Skin.HasSetting(DisableBlur)]</visible>
+                </control>
+            </control>
+            
+            <!-- Viewtypes -->
+            <control type="group">
+                <visible allowhiddenfocus="true">!$EXP[Exp_CommonAnimation]</visible>
+                <include>Animation_Common</include>
+                
+                <control type="group">
+                    <include>View_Pad</include>
+                    
+                    <!-- Top Half -->
+                    <control type="group" description="Top Half">
+                        
+                        <!-- View_Info_Grouplist -->
+                        <control type="grouplist">
+                            <orientation>vertical</orientation>
+                            <usecontrolcoords>true</usecontrolcoords>
+                            <itemgap>0</itemgap>
+                            <top>-15</top>
+                            <height>285</height>
+                            <include>Viewtype_Info_Right</include>
+                            
+                            <!-- Movie Title -->
+                            <include content="Object_Info_Title">
+                                <param name="label" value="$INFO[Window().Property(item.info.title)]" />
+                                <visible>String.IsEqual(Window().Property(item.info.mediatype),movie)</visible>
+                            </include>
+                            
+                            <!-- TV Show Title -->
+                            <include content="Object_Info_Title">
+                                <param name="label" value="$INFO[Window().Property(item.info.tvshowtitle)]" />
+                                <visible>String.IsEqual(Window().Property(item.info.mediatype),episode)</visible>
+                            </include>
+                            
+                            <!-- Infoline -->
+                            <control type="grouplist">
+                                <height>42</height>
+                                <orientation>horizontal</orientation>
+                                <usecontrolcoords>true</usecontrolcoords>
+                                <itemgap>0</itemgap>
+                                <left>0</left>
+                                <right>0</right>
+                                
+                                <!-- Movies -->
+                                    
+                                    <!-- Year -->
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.year)]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="divider" value="false" />
+                                        <param name="fallback" value="19055" />
+                                        <param name="visible" value="String.IsEqual(Window().Property(item.info.mediatype),movie)" />
+                                    </include>
+                                    
+                                    <!-- MPAA -->
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.mpaa)]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="visible" value="!String.IsEmpty(Window().Property(item.info.mpaa)) + String.IsEqual(Window().Property(item.info.mediatype),movie)" />
+                                    </include>
+                                    
+                                    <!-- Duration -->
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.duration.hours),, $LOCALIZE[31036] ]$INFO[Window().Property(item.info.duration.minutes),, $LOCALIZE[31020]]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="visible" value="[!String.IsEmpty(Window().Property(item.info.duration)) + Integer.IsGreater(Window().Property(item.info.duration.hours),0)] + String.IsEqual(Window().Property(item.info.mediatype),movie)" />
+                                    </include>
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.duration.minutes),, $LOCALIZE[31020]]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="visible" value="[!String.IsEmpty(Window().Property(item.info.duration)) + !Integer.IsGreater(Window().Property(item.info.duration.hours),0)] + String.IsEqual(Window().Property(item.info.mediatype),movie)" />
+                                    </include>
+                                
+                                <!-- Episodes -->
+                                    
+                                    <!-- Season -->
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.season),$LOCALIZE[20373] ,]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="divider" value="false" />
+                                        <param name="fallback" value="19055" />
+                                        <param name="visible" value="String.IsEqual(Window().Property(item.info.mediatype),episode)" />
+                                    </include>
+                                    
+                                    <!-- Episode -->
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.episode),$LOCALIZE[20359] ,]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="visible" value="String.IsEqual(Window().Property(item.info.mediatype),episode)" />
+                                    </include>
+                                    
+                                    <!-- MPAA -->
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.mpaa)]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="visible" value="!String.IsEmpty(Window().Property(item.info.mpaa)) + String.IsEqual(Window().Property(item.info.mediatype),episode)" />
+                                    </include>
+                                    
+                                    <!-- Premiered -->
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.premiered)]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="visible" value="!String.IsEmpty(Window().Property(item.info.premiered)) + String.IsEqual(Window().Property(item.info.mediatype),episode)" />
+                                    </include>
+                                    
+                                    <!-- Duration -->
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.duration.hours),, $LOCALIZE[31036] ]$INFO[Window().Property(item.info.duration.minutes),, $LOCALIZE[31020]]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="visible" value="[!String.IsEmpty(Window().Property(item.info.duration)) + Integer.IsGreater(Window().Property(item.info.duration.hours),0)] + String.IsEqual(Window().Property(item.info.mediatype),episode)" />
+                                    </include>
+                                    <include content="Object_Info_Line_Label">
+                                        <param name="label" value="$INFO[Window().Property(item.info.duration.minutes),, $LOCALIZE[31020]]" />
+                                        <param name="textcolor" value="main_fg_100" />
+                                        <param name="visible" value="[!String.IsEmpty(Window().Property(item.info.duration)) + !Integer.IsGreater(Window().Property(item.info.duration.hours),0)] + String.IsEqual(Window().Property(item.info.mediatype),episode)" />
+                                    </include>
+                            </control>
+                            
+                            <!-- Ratings -->
+                            <control type="group">
+                                <top>-14</top>
+                                <height>66</height>
+                                <control type="group">
+                                    <left>-14</left>
+                                    <visible>!String.IsEmpty(Window().Property(item.info.rating))</visible>
+                                    <visible>!Skin.HasSetting(DisableStarRating)</visible>
+                                    <visible>!Skin.HasSetting(NumericStarRating)</visible>
+                                    <include content="Object_StarRating">
+                                        <param name="rating_prop" value="Window().Property(item.info.rating)" />
+                                    </include>
+                                </control>
+                            </control>
+                            
+                            <!-- Episode Title -->
+                            <include content="Object_Info_Title">
+                                <param name="font" value="font_small_bold" />
+                                <param name="titleheight" value="10" />
+                                <param name="label" value="$INFO[Window().Property(item.info.title)]" />
+                                <top>30</top>
+                                <visible>String.IsEqual(Window().Property(item.info.mediatype),episode)</visible>
+                            </include>
+                            
+                            <!-- Plot -->
+                            <include content="Object_Info_Plot">
+                                <param name="maxheight" value="120" />
+                                <param name="height" value="80" />
+                                <param name="label" value="$INFO[Window().Property(item.info.plot)]" />
+                            </include>
+                            <nested />
+                        </control>
+                        
+                        <!-- Clearart -->
+                        <control type="image">
+                            <right>-15</right>
+                            <bottom>385</bottom>
+                            <height>350</height>
+                            <width>700</width>
+                            <texture background="true">$INFO[Window().Property(item.art.clearart)]</texture>
+                            <aspectratio align="right" aligny="bottom" scalediffuse="false">keep</aspectratio>
+                            <bordersize>15</bordersize>
+                            <visible>!String.IsEmpty(Window().Property(item.art.clearart))</visible>
+                        </control>
+                    </control>
+                    
+                    <label>$INFO[Window().Property(notification_text)]</label>
+                    
+                    <!-- Bottom Half -->
+                    <control type="group" description="Bottom Half">
+                        <animation effect="fade" end="0" start="100" condition="Integer.IsEqual(Container().NumItems,0)">Conditional</animation>
+                        
+                        <include content="Viewtype_BackPanel">
+                            <include>Animation_Down</include>
+                            <visible>!Integer.IsEqual(Container().NumItems,0)</visible>
+                            <height>480</height>
+                        </include>
+                        
+                        <control type="group">
+                            <include>Animation_Down</include>
+                            
+                            <control type="group">
+                                <right>-20</right>
+                                <bottom>-20</bottom>
+                                <height>360</height>
+                                <width>640</width>
+                                
+                                <control type="group">
+                                    <include content="Viewtype_Landscape_Itemlayout">
+                                        <param name="selectbox" value="false" />
+                                        <param name="id" value="50" />
+                                        <param name="icon" value="$INFO[Window().Property(item.art.fanart)]" />
+                                        <param name="diffuse" value="diffuse/landscape-big.png" />
+                                        <param name="textbox-height" value="0" />
+                                        <param name="textbox-visible" value="false" />
+                                    </include>
+                                </control>
+                            </control>
 
-        <!-- Background -->
-        <control type="image">
-            <top>0</top>
-            <left>0</left>
-            <width>1920</width>
-            <height>1080</height>
-            <texture>$INFO[Window().Property(item.art.fanart)]</texture>
+                            <control type="grouplist">
+                                <left>-15</left>
+                                <top>410</top>
+                                <height>infowidgets_item_top</height>
+                                <orientation>horizontal</orientation>
+                                <usecontrolcoords>true</usecontrolcoords>
+                                <itemgap>10</itemgap>
+                                
+                                <control type="label">
+                                    <top>17</top>
+                                    <left>15</left>
+                                    <width>auto</width>
+                                    <label>Sources</label>
+                                    <aligny>center</aligny>
+                                    <textcolor>main_fg_100</textcolor>
+                                    <font>font_tiny_bold</font>
+                                    <height>24</height>
+                                </control>
+                                
+                                <control type="label">
+                                    <top>17</top>
+                                    <width>auto</width>
+                                    <label>|</label>
+                                    <aligny>center</aligny>
+                                    <textcolor>$VAR[ColorHighlight]</textcolor>
+                                    <font>font_tiny_bold</font>
+                                    <height>24</height>
+                                </control>
+                            </control>
+                        </control>
+                        
+                        <control type="group">
+                            <include>Animation_Down</include>
+                            <right>-20</right>
+                            <bottom>-480</bottom>
+                            
+                            <include content="Defs_BusySpinner">
+                                <param name="label" value="$INFO[Window().Property(notification_text)]" />
+                                <param name="textcolor" value="main_fg_70" />
+                            </include>
+                        </control>
+                    </control>
+                </control>
+                <include>Topbar_Left</include>
+            </control>
+            <include>Object_Scrollbars</include>
         </control>
-
-        <control type="image">
-            <top>0</top>
-            <left>0</left>
-            <width>1920</width>
-            <height>1080</height>
-            <texture>$INFO[Window().Property(texture.white)]</texture>
-            <colordiffuse>CC000000</colordiffuse>
-        </control>
-
-        <!-- Seren Ico -->
-        <control type="image" id="1001">
-            <top>-50</top>
-            <left>880</left>
-            <width>150</width>
-            <aspectratio>keep</aspectratio>
-            <texture>$INFO[Window().Property(seren.logo)]</texture>
-        </control>
-
-        <control type="label">
-            <left>0</left>
-            <top>220</top>
-            <width>100%</width>
-            <font>font12</font>
-            <align>center</align>
-            <aligny>center</aligny>
-            <textcolor>FFDDDDDD</textcolor>
-            <label>$INFO[Window().Property(notification_text)]</label>
+        
+        <include>Topbar_Right</include>
+        <include>Object_NowPlaying</include>
+        
+        <!-- Overlay -->
+        <control type="group">
+            <visible>Control.HasFocus(9200)</visible>
+            <include>Animation_FadeInOut</include>
+            <include>Global_Overlay</include>
         </control>
     </controls>
 </window>
