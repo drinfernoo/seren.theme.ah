@@ -259,11 +259,12 @@
                                 <control type="label">
                                     <top>17</top>
                                     <width>auto</width>
-                                    <label>$INFO[Window().Property(source_resolution)]</label>
+                                    <label>[UPPERCASE]$INFO[Window().Property(source_resolution)][/UPPERCASE]</label>
                                     <aligny>center</aligny>
                                     <textcolor>main_fg_100</textcolor>
                                     <font>font_tiny</font>
                                     <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_resolution))</visible>
                                 </control>
                                 
                                 <control type="label">
@@ -274,6 +275,73 @@
                                     <textcolor>$VAR[ColorHighlight]</textcolor>
                                     <font>font_tiny_bold</font>
                                     <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_resolution))</visible>
+                                </control>
+                                
+                                <control type="label">
+                                    <top>17</top>
+                                    <width>auto</width>
+                                    <label>[UPPERCASE]$INFO[Window().Property(source_info)][/UPPERCASE]</label>
+                                    <aligny>center</aligny>
+                                    <textcolor>main_fg_100</textcolor>
+                                    <font>font_tiny</font>
+                                    <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_info))</visible>
+                                </control>
+                                
+                                <control type="label">
+                                    <top>17</top>
+                                    <width>auto</width>
+                                    <label>|</label>
+                                    <aligny>center</aligny>
+                                    <textcolor>$VAR[ColorHighlight]</textcolor>
+                                    <font>font_tiny_bold</font>
+                                    <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_info))</visible>
+                                </control>
+                                
+                                <control type="label">
+                                    <top>17</top>
+                                    <width>auto</width>
+                                    <label>[UPPERCASE]$INFO[Window().Property(source_size)][/UPPERCASE]</label>
+                                    <aligny>center</aligny>
+                                    <textcolor>main_fg_100</textcolor>
+                                    <font>font_tiny</font>
+                                    <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_size))</visible>
+                                </control>
+                                
+                                <control type="label">
+                                    <top>17</top>
+                                    <width>auto</width>
+                                    <label>|</label>
+                                    <aligny>center</aligny>
+                                    <textcolor>$VAR[ColorHighlight]</textcolor>
+                                    <font>font_tiny_bold</font>
+                                    <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_size))</visible>
+                                </control>
+                                
+                                <control type="label">
+                                    <top>17</top>
+                                    <width>auto</width>
+                                    <label>[UPPERCASE]$INFO[Window().Property(source_type)][/UPPERCASE]</label>
+                                    <aligny>center</aligny>
+                                    <textcolor>main_fg_100</textcolor>
+                                    <font>font_tiny</font>
+                                    <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_type))</visible>
+                                </control>
+                                
+                                <control type="label">
+                                    <top>17</top>
+                                    <width>auto</width>
+                                    <label>|</label>
+                                    <aligny>center</aligny>
+                                    <textcolor>$VAR[ColorHighlight]</textcolor>
+                                    <font>font_tiny_bold</font>
+                                    <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_type))</visible>
                                 </control>
                                 
                                 <control type="label">
@@ -284,6 +352,7 @@
                                     <textcolor>main_fg_100</textcolor>
                                     <font>font_tiny</font>
                                     <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(debrid_provider))</visible>
                                 </control>
                                 
                                 <control type="label">
@@ -294,6 +363,7 @@
                                     <textcolor>$VAR[ColorHighlight]</textcolor>
                                     <font>font_tiny_bold</font>
                                     <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(debrid_provider))</visible>
                                 </control>
                                 
                                 <control type="label">
@@ -304,26 +374,7 @@
                                     <textcolor>main_fg_100</textcolor>
                                     <font>font_tiny</font>
                                     <height>24</height>
-                                </control>
-                                
-                                <control type="label">
-                                    <top>17</top>
-                                    <width>auto</width>
-                                    <label>|</label>
-                                    <aligny>center</aligny>
-                                    <textcolor>$VAR[ColorHighlight]</textcolor>
-                                    <font>font_tiny_bold</font>
-                                    <height>24</height>
-                                </control>
-                                
-                                <control type="label">
-                                    <top>17</top>
-                                    <width>auto</width>
-                                    <label>$INFO[Window().Property(source_info)]</label>
-                                    <aligny>center</aligny>
-                                    <textcolor>main_fg_100</textcolor>
-                                    <font>font_tiny</font>
-                                    <height>24</height>
+                                    <visible>!String.IsEmpty(Window().Property(source_provider))</visible>
                                 </control>
                             </control>
                         </control>
