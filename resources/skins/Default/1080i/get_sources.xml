@@ -41,7 +41,6 @@
                     
                     <!-- Top Half -->
                     <control type="group" description="Top Half">
-                        <visible>!Integer.IsEqual(Container().NumItems,0)</visible>
                         
                         <!-- View_Info_Grouplist -->
                         <control type="grouplist">
@@ -210,16 +209,14 @@
                     
                     <!-- Bottom Half -->
                     <control type="group" description="Bottom Half">
-                        <animation effect="fade" end="0" start="100" condition="Integer.IsEqual(Container().NumItems,0)">Conditional</animation>
+                        <animation effect="fade" end="0" start="100" condition="Integer.IsEqual(Container().NumItems,0)">Visible</animation>
+                        <include conndition="Integer.IsEqual(Container().NumItems,0)">Animation_Down</include>
                         
                         <include content="Viewtype_BackPanel">
-                            <!-- <include>Animation_Down</include> -->
-                            <visible>!Integer.IsEqual(Container().NumItems,0)</visible>
                             <height>480</height>
                         </include>
                         
                         <control type="group">
-                            <!-- <include>Animation_Down</include> -->
                             
                             <control type="group">
                                 <right>-20</right>
@@ -341,10 +338,8 @@
                         </control>
                         
                         <control type="group">
-                            <!-- <include>Animation_Down</include> -->
                             <right>-20</right>
                             <bottom>-480</bottom>
-                            <visible>Integer.IsLess(Window().Property(progress),100)</visible>
                             
                             <include content="Defs_BusySpinner">
                                 <param name="label" value="[COLOR $INFO[Window().Property(settings.color)]]$INFO[Window().Property(remaining_providers_count)][/COLOR] Providers Remaining..." />
