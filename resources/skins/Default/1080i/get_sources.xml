@@ -363,7 +363,7 @@
             <include>Global_Overlay</include>
         </control>
 
-        <control tpe="list" id="2000">
+        <control type="list" id="2000">
             <visible>false</visible>
         </control>
     </controls>
