@@ -263,9 +263,6 @@
                                 <onup>300</onup>
                                 <onleft>64</onleft>
                                 <pagecontrol>64</pagecontrol>
-                                <animation effect="slide" end="0,-80" condition="Integer.IsLess(Container(1000).NumAllItems,7)">Conditional</animation>
-                                <animation effect="slide" end="0,-80" condition="Integer.IsLess(Container(1000).NumAllItems,5)">Conditional</animation>
-                                <animation effect="slide" end="0,-80" condition="Integer.IsLess(Container(1000).NumAllItems,3)">Conditional</animation>
                             </include>
                             
                             <control type="grouplist">
