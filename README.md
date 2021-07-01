@@ -6,12 +6,12 @@
 | ![Scraping Window](https://imgur.com/7WzoX6f.png) | ![Source Select](https://imgur.com/qRGYry7.png) | ![Playing Next Dialog](https://imgur.com/Q2NhOZb.png) |
 
 Requirements:
-* Seren - 1.3.6 or greater
+* Seren - 2.0.0 or greater
 * Arctic Horizon - 0.1.20 or greater
 
 Recommendations:
-* Seren - 1.6.10 or greater
-* Arctic Horizon - 0.1.36 or greater
+* Seren - 2.1.1 or greater
+* Arctic Horizon - 0.1.56 or greater
 
 **This theme WILL NOT work correctly with any skin BESIDES Arctic Horizon.**
 
