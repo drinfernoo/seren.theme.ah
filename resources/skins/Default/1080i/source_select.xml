@@ -195,7 +195,7 @@
                         <!-- Buttons -->
                         <control type="grouplist" id="300">
                             <include>Defs_ButtonList</include>
-							<param name="ondown" value="1000" />
+							<ondown>1000</ondown>
                             
                             <include content="Object_Info_Button">
                                 <param name="id" value="3101" />
