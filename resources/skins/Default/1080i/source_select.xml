@@ -229,52 +229,55 @@
                     </control>
                     
                     <!-- Bottom Half -->
-                    <control type="group" description="Bottom Half">
-                        <animation effect="fade" end="0" start="100" condition="Integer.IsEqual(Container(1000).NumItems,0)">Conditional</animation>
-                        <include condition="Integer.IsEqual(Container(1000).NumItems,0)">Animation_Down</include>
-                        
+                    <control type="group" description="Bottom Half">                        
                         <include content="Viewtype_BackPanel">
                             <height>480</height>
                         </include>
                         
                         <!-- Includes_View_50_List -->
                         <control type="group">
-                            
                             <control type="group">
-                                <right>-20</right>
+                                <right>0</right>
                                 <bottom>-20</bottom>
                                 <height>360</height>
                                 <width>640</width>
-                                
-                                <include content="Viewtype_Landscape_Itemlayout">
-                                    <param name="selectbox" value="false" />
-                                    <param name="id" value="50" />
-                                    <param name="icon" value="$INFO[Window().Property(item.art.fanart)]" />
-                                    <param name="diffuse" value="diffuse/landscape-big.png" />
-                                    <param name="textbox-height" value="0" />
-                                    <param name="textbox-visible" value="false" />
-                                </include>
-                            </control>
-                        
-                            <control type="group">
-                                <left>-20</left>
-                                <bottom>-20</bottom>
-                                <right>620</right>
-                                <height>360</height>
-                                <include>Object_PosterBack</include>
+                                <control type="group">
+                                    <include>Object_PosterBack</include>
+                                    <control type="group">
+                                        <control type="image">
+                                            <bordersize>0</bordersize>
+                                            <aspectratio scalediffuse="true">keep</aspectratio>
+                                            <texture background="true" diffuse="diffuse/landscape-big.png">$INFO[Window().Property(item.art.fanart)]</texture>
+                                        </control>
+                                    </control>
+                                </control>
                             </control>
                             
-                            <include content="Viewtype_FileList">
-                                <param name="id" value="1000" />
-                                <param name="itemlayout-width" value="1120" />
-                                <width>1120</width>
-                                <left>0</left>
-                                <bottom>0</bottom>
-                                <height>320</height>
-                                <onup>300</onup>
-                                <onleft>64</onleft>
-                                <pagecontrol>64</pagecontrol>
-                            </include>
+                            <control type="group">
+                                    <param name="selectbox" value="false" />
+                                    <param name="id" value="50" />
+
+                                <control type="group">
+                                    <include>Object_PosterBack</include>
+                                    <left>-20</left>
+                                    <bottom>-20</bottom>
+                                    <width>1080</width>
+                                    <height>360</height>
+                                </control>
+
+                                <include content="Viewtype_FileList">
+                                    <param name="id" value="1000" />
+                                    <param name="itemlayout-width" value="1040" />
+                                    <param name="itemlayout-height" value="80" />
+                                    <onup>300</onup>
+                                    <onleft>64</onleft>
+                                    <pagecontrol>64</pagecontrol>
+                                    <left>0</left>
+                                    <bottom>0</bottom>
+                                    <width>1040</width>
+                                    <height>320</height>
+                                </include>
+                            </control>
                             
                             <control type="grouplist">
                                 <left>-15</left>
