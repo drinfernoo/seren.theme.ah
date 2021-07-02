@@ -181,11 +181,13 @@
                         </control>
                         
                         <!-- Clearart -->
-                        <control type="image">
+                        <control type="group">
                             <right>-15</right>
                             <bottom>385</bottom>
                             <height>350</height>
                             <width>700</width>
+
+                            <control type="image">
                             <texture background="true">$INFO[Window().Property(item.art.clearart)]</texture>
                             <aspectratio align="right" aligny="bottom" scalediffuse="false">keep</aspectratio>
                             <bordersize>15</bordersize>
@@ -193,14 +195,11 @@
                         </control>
 
                         <control type="image">
-                            <right>-15</right>
-                            <bottom>385</bottom>
-                            <height>350</height>
-                            <width>700</width>
                             <texture background="true">$INFO[Window().Property(item.art.tvshow.clearart)]</texture>
                             <aspectratio align="right" aligny="bottom" scalediffuse="false">keep</aspectratio>
                             <bordersize>15</bordersize>
                             <visible>String.IsEmpty(Window().Property(item.art.clearart)) + !String.IsEmpty(Window().Property(item.art.tvshow.clearart))</visible>
+                        </control>
                         </control>
                         
                         <!-- Buttons -->
