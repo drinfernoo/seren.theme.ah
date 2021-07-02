@@ -195,15 +195,16 @@
                         <!-- Buttons -->
                         <control type="grouplist" id="300">
                             <include>Defs_ButtonList</include>
+							<param name="ondown" value="1000" />
                             
                             <include content="Object_Info_Button">
                                 <param name="id" value="3101" />
                                 <param name="groupid" value="3001" />
                                 <param name="label" value="Rescrape Item" />
                                 <param name="icon" value="special://skin/extras/icons/update.png" />
-                                <param name="ondown" value="1000" />
                                 <onclick>Close</onclick>
-                                <onclick>PlayMedia(plugin://plugin.video.seren/?action=getSources&amp;action_args=%257B%2522mediatype%2522%253A%2520%2522$INFO[Window().Property(item.info.mediatype)]%2522%252C%2520%2522trakt_id%2522%253A%2520$INFO[Window().Property(item.ids.trakt_id)]%257D&amp;from_widget=true&amp;seren_reload=true&amp;source_select=true)</onclick>
+                                <onclick condition="String.IsEqual(Window().Property(item.info.mediatype),movie)">PlayMedia(plugin://plugin.video.seren/?action=getSources&amp;action_args=%257B%2522mediatype%2522%253A%2520%2522movie%2522%252C%2520%2522trakt_id%2522%253A%2520$INFO[Window().Property(item.ids.trakt_id)]%257D&amp;from_widget=true&amp;seren_reload=true&amp;source_select=true)</onclick>
+                                <onclick condition="String.IsEqual(Window().Property(item.info.mediatype),episode)">PlayMedia(plugin://plugin.video.seren/?action=getSources&amp;action_args=%257B%2522mediatype%2522%253A%2520%2522episode%2522%252C%2520%2522trakt_id%2522%253A%2520$INFO[Window().Property(item.ids.trakt_id)]%252C%2520%2522trakt_show_id%2522%253A%2520$INFO[Window().Property(item.ids.tvshow.trakt_id)]%257D&amp;from_widget=false&amp;seren_reload=true&amp;source_select=true)</onclick>
                             </include>
 
                             <include content="Object_Info_Button">
@@ -211,8 +212,8 @@
                                 <param name="groupid" value="3002" />
                                 <param name="label" value="Trakt Manager" />
                                 <param name="icon" value="special://skin/extras/icons/trakttv.png" />
-                                <onclick>RunPlugin(plugin://plugin.video.seren/?action=traktManager&action_args=%7B%22mediatype%22%3A%20%22$INFO[Window().Property(item.info.mediatype)]%22%2C%20%22trakt_id%22%3A%20$INFO[Window().Property(item.ids.trakt_id)]%7D)</onclick>
-                                <onclick>RunPlugin(plugin://plugin.video.seren/?action=traktManager&amp;actionArgs=%7B%22item_type%22%3A%20%22$INFO[Window().Property(item.info.mediatype)]%22%2C%20%22trakt_id%22%3A%20$INFO[Window().Property(item.ids.trakt_id)]%7D)</onclick>
+                                <onclick condition="String.IsEqual(Window().Property(item.info.mediatype),movie)">RunPlugin(plugin://plugin.video.seren/?action=traktManager&amp;action_args=%7B%22mediatype%22%3A%20%22$INFO[Window().Property(item.info.mediatype)]%22%2C%20%22trakt_id%22%3A%20$INFO[Window().Property(item.ids.trakt_id)]%7D)</onclick>
+                                <onclick condition="String.IsEqual(Window().Property(item.info.mediatype),episode)">RunPlugin(plugin://plugin.video.seren/?action=traktManager&action_args=%7B%22mediatype%22%3A%20%22episode%22%2C%20%22trakt_id%22%3A%204590805%2C%20%22trakt_show_id%22%3A%20146518%7D)</onclick>
                             </include>
                         </control>
                     </control>
